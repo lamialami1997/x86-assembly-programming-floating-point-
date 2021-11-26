@@ -1,21 +1,21 @@
-all:  nbody0 nbody1a nbody1b nbodydo
+all:  nbody_soa nbody_scal nbody_vect nbody_c
 
 
-nbody0: nbody0.c
+nbody_soa: nbody_soa.c
 	gcc -g -Ofast -funroll-loops -finline-functions -ftree-vectorize $< -o $@ -lm -lSDL2 
-nbody1a: nbody1a.c
+nbody_scal: nbody_scal.c
 	gcc -g -Ofast -funroll-loops -finline-functions -ftree-vectorize $< -o $@ -lm -lSDL2 
-nbody1b: nbody1b.c
+nbody_vect: nbody_vect.c
 	gcc -g -Ofast -funroll-loops -finline-functions -ftree-vectorize $< -o $@ -lm -lSDL2
-nbodydo: nbodydo.c
+nbody_c: nbody_c.c
 	gcc -g -Ofast -funroll-loops -finline-functions -ftree-vectorize $< -o $@ -lm -lSDL2 
 
-run:  nbody0 nbody1a nbody1b nbodydo
+run:  nbody0 nbody_scal nbody_vect nbody_c
 	
-	sudo taskset -c 1 ./nbody0 > out0.dat
-	sudo taskset -c 1 ./nbody1a > out1.dat
-	sudo taskset -c 1 ./nbody1b > out2.dat
-	sudo taskset -c 1 ./nbodydo > out3.dat
+	sudo taskset -c 1 ./nbody_soa > out0.dat
+	sudo taskset -c 1 ./nbody_scal > out1.dat
+	sudo taskset -c 1 ./nbody_vect > out2.dat
+	sudo taskset -c 1 ./nbody_ > out3.dat
 	gnuplot ./plot.gp > out.png
 clean:
-	rm -Rf *~ nbody0 nbody1a nbody1b nbodydo *.dat out.png
+	rm -Rf *~ nbody_soa nbody_scal nbody_vect nbody_c *.dat out.png
