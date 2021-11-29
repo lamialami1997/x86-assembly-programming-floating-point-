@@ -1,9 +1,4 @@
-/*
-  N-BODY collision simulation
-  
-  Bad code --> optimize
-  
-*/
+//C version scalaire 
 
 #include <time.h>
 #include <math.h>
@@ -233,7 +228,7 @@ double mod(vector a)
 void init_system()
 {
   w = h = 800;
-  nbodies = 500;
+  nbodies = 600;
   GravConstant = 1;
   timeSteps = 1000;
   

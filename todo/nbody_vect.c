@@ -1,9 +1,4 @@
-/*
-  N-BODY collision simulation
-  
-  Bad code --> optimize
-  
-*/
+// C version vecteur 
 
 #include <time.h>
 #include <math.h>
@@ -101,7 +96,7 @@ vector asm_scale_vector(double b, vector a)
   vector c __attribute__((aligned(16)));
 
   __asm__ volatile (
-        "movapd %[a], %%xmm0;\n"
+        "movapd %[a], %%xmm0;\n" //MOVAPD — Move Aligned Packed Double-Precision Floating-Point Values
         "movapd %[b], %%xmm1;\n"
 
         "mulpd %%xmm1, %%xmm0;\n"
@@ -203,12 +198,13 @@ double mod(vector a)
 void init_system()
 {
   w = h = 800;
-  nbodies = 500;
+  nbodies = 600;
   GravConstant = 1;
   timeSteps = 1000;
   
-  //
+
   masses        = malloc(nbodies * sizeof(double));
+    //les points sont groupés dans un seul tableau ,
   positions     = malloc(nbodies * sizeof(vector));
   velocities    = malloc(nbodies * sizeof(vector));
   accelerations = malloc(nbodies * sizeof(vector));

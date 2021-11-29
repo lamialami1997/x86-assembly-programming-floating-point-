@@ -1,3 +1,5 @@
+// C version SOA 
+
 #include <time.h>
 #include <math.h>
 #include <stdio.h>
@@ -49,12 +51,13 @@ double randreal()
 void init_system()
 {
   w = h = 800;
-  nbodies = 500;
+  nbodies = 600;
   GravConstant = 1;
   timeSteps = 1000;
   
   // 
   masses       = malloc(nbodies * sizeof(double));
+  // les points sont groupés dans deux  tableaux distincts 
   positionsx  = malloc(nbodies * sizeof(double));
   positionsy  = malloc(nbodies * sizeof(double));
   velocitiesx = malloc(nbodies * sizeof(double));
@@ -106,6 +109,7 @@ void compute_accelerations()
       {
   if(i != j)
     {
+      
       accelerationsx[i] = accelerationsx[i] + (GravConstant * masses[j] / 
         (pow(sqrt((positionsx[i]-positionsx[j])*(positionsx[i]-positionsx[j]) + (positionsy[i]-positionsy[j])*(positionsy[i]-positionsy[j])),3) + 1e7)) *
                   (positionsx[j] - positionsx[i]); 
@@ -123,6 +127,7 @@ void compute_velocities()
 {  
   for (int i = 0; i < nbodies; i++)
     { 
+      //  add_vectors 
       velocitiesx[i] = (velocitiesx[i] + accelerationsx[i]);
       velocitiesy[i] = velocitiesy[i] + accelerationsy[i];
 
@@ -133,6 +138,7 @@ void compute_velocities()
 void compute_positions()
 {
   for (int i = 0; i < nbodies; i++)
+  // add_vectors et scal_vector 
     {
       positionsx[i] = positionsx[i] + (velocitiesx[i] + 0.5 * accelerationsx[i]);
       positionsy[i] = positionsy[i] + (velocitiesy[i] + 0.5 * accelerationsy[i]);

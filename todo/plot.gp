@@ -1,4 +1,4 @@
-set terminal png size 1900,1050 
+set terminal png size 1900,1100
 set grid  
 set ylabel "Latency in cycles"  
 set xlabel "Simulation iteration"  

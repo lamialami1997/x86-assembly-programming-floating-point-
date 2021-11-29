@@ -1,9 +1,4 @@
-/*
-  N-BODY collision simulation
-  
-  Bad code --> optimize
-  
-*/
+//C version sans structure 
 
 #include <time.h>
 #include <math.h>
