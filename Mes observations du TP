@@ -1,0 +1,24 @@
+Mes notes du TP ASSEMBLEUR ( AOS vs SOA)
+
+parallélisation
+horizontale traite chaque voie dans votre unité SIMD comme un « thread » séparé travaillant sur des données différentes.
+  ---> SoA est logique que pour la parallélisation horizontal.
+  --->Lorsque chaque voie est l' accès le même champ de différents objets,
+  ---> SoA permet de remplacer une instruction coûteuse de recueillir une meilleure mémoire aligné unique chercher.
+L'inconvénient est qu'il faut plus de moyens de cache lors du passage des données et un adressage indexé inefficace 
+
+
+Vertical parallélisation (AOS) prend toute l'unité SIMD travaillant sur le même objet de données, en essayant de tirer profit de sa multidimensionnalité intérieure.
+
+Le programme de test compare ensuite deux solutions distinctes à un même problème.
+
+La première applique une approche SoA (version vecteur )  : les vecteurs sont groupés dans un seul tableau , 
+La seconde applique une approche AoS : les vecteurs sont placés dans des tableaux distincts, un paur les valeur de x et un autre pour les valeurs de y . 
+
+
+/////
+Puisque les tableaux des valeurs sont mieux alignés , nous avons économisé des bytes valeurs avec l'approche AoS
+De plus, en itérant sur des positions plutôt que sur des valeurs, la Cache est mieux utilisée et le temps d'exécution est réduit
+
+les performances peuvent être considérablement affectées par le modèle d'accès à la mémoire, 
+par exemple où vous avez des caches ou où les performances sont meilleures avec un accès à la mémoire contigues 
