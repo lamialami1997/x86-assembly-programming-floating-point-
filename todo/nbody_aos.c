@@ -1,4 +1,4 @@
-//C version sans structure 
+//C version AOS
 
 #include <time.h>
 #include <math.h>
@@ -109,8 +109,8 @@ void init_system()
       velocities[i].y = randreal();
     }
 }
+/ /
 
-//
 void resolve_collisions()
 {
   //
